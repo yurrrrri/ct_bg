@@ -10,22 +10,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        int result;
 
-        if(n == 1) result = 1;
-        else if(n <= 3) result = 2;
-        else {
-            Queue<Integer> queue = new LinkedList<>();
-            for(int i=1; i<=n; i++) queue.add(i);
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i=1; i<=n; i++) queue.add(i);
 
-            while(queue.size() > 1){
-                queue.remove();
-                int temp = queue.poll();
-                queue.offer(temp);
-            }
-            result = queue.peek();
+        while(queue.size() > 1){
+            queue.poll();
+            queue.add(queue.poll());
         }
-        System.out.println(result);
+        System.out.println(queue.poll());
 
         br.close();
     }
